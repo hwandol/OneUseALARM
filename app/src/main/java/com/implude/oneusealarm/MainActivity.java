@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonSound.setShadowLayer(30, 10, 10, Color.BLACK);
-
         buttonVib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
