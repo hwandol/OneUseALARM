@@ -9,7 +9,11 @@
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+    <style name="Clock" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/Magenta</item>
+        <item name="android:textColorHint">@color/Pink</item>
     </style>
 
 </resources>

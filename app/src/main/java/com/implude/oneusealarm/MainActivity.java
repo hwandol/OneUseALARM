@@ -1,11 +1,8 @@
 package com.implude.oneusealarm;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TimePicker;
 
@@ -15,9 +12,11 @@ public class MainActivity extends AppCompatActivity {
     Button buttonVib, buttonSound, buttonAddAlarm;
 
     int hour=-1, minute=-1;
+    int which=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -25,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         buttonVib = (Button)findViewById(R.id.VibButton);
         buttonSound = (Button)findViewById(R.id.SoundButton);
         buttonAddAlarm = (Button)findViewById(R.id.AddAlarmButton);
+
+        buttonSound.setBackgroundResource(R.drawable.sound_clicked);
 
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
@@ -37,14 +38,24 @@ public class MainActivity extends AppCompatActivity {
         buttonVib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(which==1) {
+                    buttonVib.setBackgroundResource(R.drawable.vib_clicked);
+                    buttonSound.setBackgroundResource(R.drawable.sound);
 
+                    which=2;
+                }
             }
         });
 
         buttonSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(which==2) {
+                    buttonVib.setBackgroundResource(R.drawable.vib);
+                    buttonSound.setBackgroundResource(R.drawable.sound_clicked);
 
+                    which=1;
+                }
             }
         });
 
