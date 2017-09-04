@@ -1,5 +1,9 @@
 package com.implude.oneusealarm;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -62,7 +66,24 @@ public class MainActivity extends AppCompatActivity {
         buttonAddAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int hour = timePicker.getHour();
+                int minute = timePicker.getMinute();
 
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.HOUR_OF_DAY, hour);
+                cal.set(Calendar.MINUTE, minute);
+
+                Intent alarmIntent = new Intent("com.implude.oneusealarm.ALARM_START");
+
+                PendingIntent pendingIntent =
+                        PendingIntent.getBroadcast(
+                                getApplicationContext(),
+                                123,
+                                alarmIntent,
+                                PendingIntent.FLAG_CANCEL_CURRENT
+                        );
+
+                //AlarmManager
             }
         });
     }
