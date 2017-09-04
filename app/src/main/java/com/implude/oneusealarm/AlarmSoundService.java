@@ -6,18 +6,18 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
 
 public class AlarmSoundService extends Service {
     public AlarmSoundService(){
-
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this,"알람이 울리고 있습니다",Toast.LENGTH_LONG).show();
-        return super.onStartCommand(intent, flags, startId);
+        Toast.makeText(getApplicationContext(),"알람이 울리고 있습니다",Toast.LENGTH_LONG).show();
+        return START_STICKY;
     }
 
     /*@Override

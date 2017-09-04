@@ -2,20 +2,22 @@ package com.implude.oneusealarm;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     TimePicker timePicker;
     Button buttonVib, buttonSound, buttonAddAlarm;
 
-    int hour=-1, minute=-1;
     int which=1;
 
     @Override
@@ -30,14 +32,6 @@ public class MainActivity extends AppCompatActivity {
         buttonAddAlarm = (Button)findViewById(R.id.AddAlarmButton);
 
         buttonSound.setBackgroundResource(R.drawable.sound_clicked);
-
-        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker timePicker, int i, int i1) {
-                hour = timePicker.getHour();
-                minute = timePicker.getMinute();
-            }
-        });
 
         buttonVib.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 Calendar cal = Calendar.getInstance();
                 cal.set(Calendar.HOUR_OF_DAY, hour);
                 cal.set(Calendar.MINUTE, minute);
+                cal.set(Calendar.SECOND, 1);
 
                 Intent alarmIntent = new Intent("com.implude.oneusealarm.ALARM_START");
 
@@ -80,10 +75,19 @@ public class MainActivity extends AppCompatActivity {
                                 getApplicationContext(),
                                 123,
                                 alarmIntent,
-                                PendingIntent.FLAG_CANCEL_CURRENT
+                                PendingIntent.FLAG_UPDATE_CURRENT
                         );
 
-                //AlarmManager
+                AlarmManager alarmManager = (AlarmManager)
+                        getSystemService(Context.ALARM_SERVICE);
+
+                alarmManager.set(
+                        AlarmManager.RTC_WAKEUP,
+                        cal.getTimeInMillis(),
+                        pendingIntent
+                );
+
+                Toast.makeText(getApplicationContext(), ""+hour+"시 "+minute+"분 알람 설정됨", Toast.LENGTH_SHORT).show();
             }
         });
     }
