@@ -13,6 +13,7 @@ import java.util.Date;
 
 public class AlarmPlayActivity extends AppCompatActivity {
 
+
     MediaPlayer mediaPlayer;
 
     @Override
@@ -22,23 +23,20 @@ public class AlarmPlayActivity extends AppCompatActivity {
 
 
         int mode = getIntent().getExtras().getInt("Mode");
-
-        TextView nowHour = (TextView) findViewById(R.id.nowHour);
-        TextView nowMin = (TextView) findViewById(R.id.nowMin);
         Button stopBtn = (Button)findViewById(R.id.stopAlmBtn);
-        //TextView nowDay = (TextView)findViewById(R.id.nowDate);
+
+        TextView nowTime = (TextView) findViewById(R.id.nowTime);
+        TextView nowDay = (TextView)findViewById(R.id.nowDate);
+
 
         long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat hour = new SimpleDateFormat("hh");
-        SimpleDateFormat min = new SimpleDateFormat("mm");
-        SimpleDateFormat day = new SimpleDateFormat("mm/dd");
-        String sHour =hour.format(date);
-        String sMin = min.format(date);
+        SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat day = new SimpleDateFormat("MM.dd");
+        String sTime =time.format(date);
         String sDay = day.format(date);
-        nowHour.setText(sHour);
-        nowMin.setText(sMin);
-        //nowDay.setText(sDay);
+        nowTime.setText(sTime);
+        nowDay.setText(sDay);
 
 
         stopBtn.setOnClickListener(new View.OnClickListener() {
