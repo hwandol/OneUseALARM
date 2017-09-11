@@ -10,6 +10,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent mServiceintent = new Intent(context, AlarmPlayActivity.class);
+        mServiceintent.putExtra("Mode",intent.getExtras().getInt("Mode"));
         mServiceintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(mServiceintent);
     }
