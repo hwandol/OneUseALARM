@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -18,6 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
     TimePicker timePicker;
     Button buttonVib, buttonSound, buttonAddAlarm;
+
+    Animation anim_timepicker, anim_buttonsound,
+                anim_buttonvib, anim_buttonaddalarm, anim_disappear;
+
+    Animation anim_timepicker_back, anim_buttonsound_back,
+            anim_buttonvib_back, anim_buttonaddalarm_back, anim_disappear_back;
 
     int which=1;
 
@@ -33,6 +41,24 @@ public class MainActivity extends AppCompatActivity {
         buttonAddAlarm = (Button)findViewById(R.id.AddAlarmButton);
 
         buttonSound.setBackgroundResource(R.drawable.sound_clicked);
+
+        anim_buttonaddalarm = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_buttonaddalarm);
+        buttonAddAlarm.startAnimation(anim_buttonaddalarm);
+
+        anim_buttonsound = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_buttonsound);
+        buttonSound.startAnimation(anim_buttonsound);
+
+        anim_buttonvib = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_buttonvib);
+        buttonVib.startAnimation(anim_buttonvib);
+
+        anim_timepicker = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_timepicker);
+        timePicker.startAnimation(anim_timepicker);
+
+        anim_buttonaddalarm_back = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_buttonaddalarm_back);
+        anim_buttonsound_back = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_buttonsound_back);
+        anim_buttonvib_back = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_buttonvib_back);
+        anim_timepicker_back = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_timepicker_back);
+
 
         buttonVib.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +114,23 @@ public class MainActivity extends AppCompatActivity {
                         pendingIntent
                 );
 
-                Toast.makeText(getApplicationContext(), ""+hour+"시 "+minute+"분 알람 설정됨", Toast.LENGTH_SHORT).show();
+                timePicker.startAnimation(anim_timepicker_back);
+                buttonSound.startAnimation(anim_buttonsound_back);
+                buttonVib.startAnimation(anim_buttonvib_back);
+                buttonAddAlarm.startAnimation(anim_buttonaddalarm_back);
+
+                anim_timepicker_back.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {}
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        finish();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {}
+                });
             }
         });
     }
