@@ -20,6 +20,7 @@ public class AlarmPlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_play);
 
+
         int mode = getIntent().getExtras().getInt("Mode");
 
         TextView nowHour = (TextView) findViewById(R.id.nowHour);
