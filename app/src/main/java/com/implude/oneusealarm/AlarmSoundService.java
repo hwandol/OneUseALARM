@@ -16,8 +16,10 @@ public class AlarmSoundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(getApplicationContext(),"알람이 울리고 있습니다",Toast.LENGTH_LONG).show();
-        return START_STICKY;
+        //Intent mintent = new Intent(getApplicationContext(), AlarmPlayActivity.class);
+        //startActivity(intent);
+
+        return START_NOT_STICKY;
     }
 
     /*@Override

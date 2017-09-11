@@ -4,14 +4,14 @@
         android:fromXDelta="0%p"
         android:toXDelta="0%p"
 
-        android:fromYDelta="15%p"
-        android:toYDelta="0%p"
+        android:fromYDelta="0%p"
+        android:toYDelta="25%p"
 
         android:duration="650"
         ></translate>
     <alpha
-        android:fromAlpha="0.3"
-        android:toAlpha="1"
+        android:fromAlpha="1"
+        android:toAlpha="0.1"
 
         android:duration="650"
         ></alpha>

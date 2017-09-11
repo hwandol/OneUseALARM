@@ -9,10 +9,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent mServiceintent = new Intent(context, AlarmSoundService.class);
+        Intent mServiceintent = new Intent(context, AlarmPlayActivity.class);
         mServiceintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startService(mServiceintent);
-
-        Toast.makeText(context, "asdf",Toast.LENGTH_SHORT).show();
+        context.startActivity(mServiceintent);
     }
 }
