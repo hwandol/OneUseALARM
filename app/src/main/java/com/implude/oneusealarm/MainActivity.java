@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int MODE_SOUND=1, MODE_VIB=2;
+
     TimePicker timePicker;
     Button buttonVib, buttonSound, buttonAddAlarm;
 
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Animation anim_timepicker_back, anim_buttonsound_back,
             anim_buttonvib_back, anim_buttonaddalarm_back, anim_disappear_back;
 
-    int which=1;
+    int which=MODE_SOUND;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
         buttonVib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(which==1) {
+                if(which==MODE_SOUND) {
                     buttonVib.setBackgroundResource(R.drawable.vib_clicked);
                     buttonSound.setBackgroundResource(R.drawable.sound);
 
-                    which=2;
+                    which=MODE_VIB;
                 }
             }
         });
@@ -75,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
         buttonSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(which==2) {
+                if(which==MODE_VIB) {
                     buttonVib.setBackgroundResource(R.drawable.vib);
                     buttonSound.setBackgroundResource(R.drawable.sound_clicked);
 
-                    which=1;
+                    which=MODE_SOUND;
                 }
             }
         });
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 cal.set(Calendar.SECOND, 1);
 
                 Intent alarmIntent = new Intent("com.implude.oneusealarm.ALARM_START");
+                alarmIntent.putExtra("Mode", which);
 
                 PendingIntent pendingIntent =
                         PendingIntent.getBroadcast(
