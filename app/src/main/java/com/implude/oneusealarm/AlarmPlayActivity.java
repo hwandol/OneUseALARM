@@ -15,6 +15,7 @@ import java.util.Date;
 
 public class AlarmPlayActivity extends AppCompatActivity {
     public static final int MODE_SOUND=1, MODE_VIB=2;
+    
 
     MediaPlayer mediaPlayer;
 
