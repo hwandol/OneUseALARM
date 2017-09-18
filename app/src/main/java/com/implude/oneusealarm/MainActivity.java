@@ -24,10 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonVib, buttonSound, buttonAddAlarm;
 
     Animation anim_timepicker, anim_buttonsound,
-                anim_buttonvib, anim_buttonaddalarm, anim_disappear;
-
-    Animation anim_timepicker_back, anim_buttonsound_back,
-            anim_buttonvib_back, anim_buttonaddalarm_back, anim_disappear_back;
+                anim_buttonvib, anim_buttonaddalarm;
 
     int which=MODE_SOUND;
 
@@ -55,11 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
         anim_timepicker = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_timepicker);
         timePicker.startAnimation(anim_timepicker);
-
-        anim_buttonaddalarm_back = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_buttonaddalarm_back);
-        anim_buttonsound_back = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_buttonsound_back);
-        anim_buttonvib_back = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_buttonvib_back);
-        anim_timepicker_back = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_timepicker_back);
 
 
         buttonVib.setOnClickListener(new View.OnClickListener() {
@@ -117,23 +109,7 @@ public class MainActivity extends AppCompatActivity {
                         pendingIntent
                 );
 
-                timePicker.startAnimation(anim_timepicker_back);
-                buttonSound.startAnimation(anim_buttonsound_back);
-                buttonVib.startAnimation(anim_buttonvib_back);
-                buttonAddAlarm.startAnimation(anim_buttonaddalarm_back);
-
-                anim_timepicker_back.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {}
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        finish();
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {}
-                });
+                finish();
             }
         });
     }
