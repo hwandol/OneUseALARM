@@ -18,7 +18,7 @@ import java.util.Date;
 public class AlarmPlayActivity extends AppCompatActivity {
     public static final int MODE_SOUND=1, MODE_VIB=2;
 
-
+    Vibrator vibrator;
     MediaPlayer mediaPlayer;
     TextView nowTime;
     TextView nowDay;
@@ -30,7 +30,7 @@ public class AlarmPlayActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_play);
-        final Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 
         int mode = getIntent().getExtras().getInt("Mode");
 
@@ -76,6 +76,9 @@ public class AlarmPlayActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        vibrator.cancel();
+    }
 }
 
