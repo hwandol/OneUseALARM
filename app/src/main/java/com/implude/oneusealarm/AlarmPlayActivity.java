@@ -2,6 +2,7 @@ package com.implude.oneusealarm;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,9 +17,12 @@ import java.util.Date;
 
 public class AlarmPlayActivity extends AppCompatActivity {
     public static final int MODE_SOUND=1, MODE_VIB=2;
-    
+
 
     MediaPlayer mediaPlayer;
+    TextView nowTime;
+    TextView nowDay;
+    long now;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +51,11 @@ public class AlarmPlayActivity extends AppCompatActivity {
 
         Button stopBtn = (Button)findViewById(R.id.stopAlmBtn);
 
-        TextView nowTime = (TextView) findViewById(R.id.nowTime);
-        TextView nowDay = (TextView)findViewById(R.id.nowDate);
+        nowTime = (TextView) findViewById(R.id.nowTime);
+        nowDay = (TextView)findViewById(R.id.nowDate);
 
 
-        long now = System.currentTimeMillis();
+        now = System.currentTimeMillis();
         Date date = new Date(now);
         SimpleDateFormat time = new SimpleDateFormat("HH:mm");
         SimpleDateFormat day = new SimpleDateFormat("MM.dd");
@@ -65,6 +69,7 @@ public class AlarmPlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mediaPlayer.stop();
+                final Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.cancel();
                 finish();
             }
@@ -73,3 +78,4 @@ public class AlarmPlayActivity extends AppCompatActivity {
 
 
 }
+
